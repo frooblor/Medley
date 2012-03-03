@@ -1,0 +1,100 @@
+<div class="row">
+
+    <div class="span12">
+
+        <h2><%= title %></h2>
+        <small>By <a href="mailto:<%= author.email %>"><%= author.name %></a></small>
+    
+        <br /><br />
+    
+        <p>
+            <%= content %>
+        </p>
+        <hr />
+    </div>
+</div>
+
+<!-- COMMENT FORM -->
+<div class="row">
+    <div class="span6">
+        <% if (comments.length == 0) { %>
+            <b>No comments</b>
+        <% } else { %>
+            <h3>Comments</h3>
+
+        <% } %>
+        <% for(i=0; i<comments.length; i++) { %>
+        <div class="comment">
+            <p>
+                <b><%= comments[i].name %> said</b><br>
+                <%= comments[i].text %>
+                <br>
+                <small><%= comments[i].date %></small>
+            </p>
+        </div>
+        <% } %>
+    </div>
+    
+    
+    <div class="span6">
+        <form class="form-horizontal" method="POST" action="/comment">
+            <fieldset>
+                <legend>Add a comment</legend>
+
+                <div class="control-group">
+                    <label class="control-label" for="name">Your name</label>
+                    <div class="controls">
+                        <input type="text" name="name" id="name">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="text">Comment</label>
+                    <div class="controls">
+                        <textarea class="input-xlarge" id="text" name="text" rows="6" cols="50"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <input type="hidden" value="<%= urlslug %>" name="urlslug">
+                    <button type="submit" class="btn btn-primary">Comment</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    
+</div>
+
+<!-- THIS SECTION IS FOR INSTRUCTIONAL PURPOSES -->
+<div class="row">
+
+    <div class="span10">
+        <h3>Code sample - how a single blog post is displayed</h3>
+        <pre>
+// web.js
+// Display a single blog post
+// A user might request /entry/this-blog-is-great
+//
+// this-blog-is-great will be the variable :urlslug => request.params.urlslug
+
+app.get('/entry/:urlslug',function(request, response){
+
+    // Get the request blog post by urlslug
+    BlogPost.findOne({urlslug:request.params.urlslug},function(err,post){
+        if (err) {
+            console.log('error');
+            console.log(err);
+            response.send("uh oh, can't find that post");
+        }
+
+        // use different layout for single entry view
+        post.layout = 'layout_single_entry.html';
+
+        // found the blogpost
+        response.render('blog_single_entry.html', post);
+    });
+});
+        </pre>
+    </div>
+
+</div>
