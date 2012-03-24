@@ -1,0 +1,70 @@
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Upload an Image</title>
+		 <h1>Upload a file</h1>
+        <link rel="stylesheet" href="/css/bootstrap.css">
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
+
+    <body>
+		<div class = "container">
+
+			<form method="POST" enctype="multipart/form-data>
+			       
+			        <div class="control-group">
+			            <label class="control-label" for="title">Name</label>
+			            <div class="controls">
+			                <input type="text" name="title" id="title">
+			            </div>
+			       
+			            <label class="control-label" for="image"> Image </label>
+			            <div class="controls">
+			                <input type="file" name="image" id="image">
+			            </div>
+			        </form>
+					
+			</div>
+				
+     
+        
+    
+        
+			        <div class="form-actions">
+			            <button type="submit" class="btn btn-primary">Save entry</button>
+			            <button class="btn">Cancel</button>
+			        </div>
+			    </fieldset>
+			</form>
+            
+        </div>
+
+        <!-- JavaScript at the bottom for fast page loading -->
+        <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        
+        <script>
+        function convertToSlug(Text)
+        {
+            return Text
+                .toLowerCase()
+                .replace(/[^\w ]+/g,'')
+                .replace(/ +/g,'-')
+                ;
+        }
+
+        jQuery(document).ready(function() {
+
+            jQuery('#title').change(function(e){
+                var currentTitle = jQuery(this).val();
+                jQuery("#urlslug").val(convertToSlug(currentTitle));
+
+            });
+
+        });
+        </script>
+    </body>
+</html>
+
+

@@ -20,8 +20,37 @@ module.exports.configureSchema = function(Schema, mongoose) {
         , email  : String
       }
     });
+	
+    // Media Entry 
+    var MediaEntry = new Schema({
+      title     : String
+    , urlslug   : String
+    , content   : String
+    , date      : { type: Date, default: Date.now }
+    , comments  : [Comments]
+    , author      : {
+        name : String
+        , email  : String
+      }
+    });
+	
+    // Text Entry 
+    var TextEntry = new Schema({
+      title     : String
+    , urlslug   : String
+    , content   : String
+    , date      : { type: Date, default: Date.now }
+    , comments  : [Comments]
+    , author      : {
+        name : String
+        , email  : String
+      }
+    });
+	
 
     // add schemas to Mongoose
+	mongoose.model('TextEntry', TextEntry);
+	mongoose.model('MediaEntry', MediaEntry);
     mongoose.model('BlogPost', BlogPost);
     mongoose.model('Comment', Comments);
 

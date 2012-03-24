@@ -3,7 +3,12 @@
   "version": "0.0.1",
   "dependencies": {
     "express": "2.5.6",
+	"connect-form": ">=0.2.1"
     "ejs" : "latest",
-    "mongoose" : "2.5.6"
+    "mongoose" : "2.5.6",
+    "formidable": ">=1.0.8",
+    "node-static": ">=0.5.9",
+    "imagemagick": ">=0.1.2"
+	
   }
 }
